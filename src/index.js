@@ -1,17 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./style.css";
+import NavBar from "./component/NavBar";
+import Hero from "./component/Hero";
+import Card from "./component/Card";
+import Data from "./Data";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const App = () => {
+  const arr = Data.map((x) => {
+    return <Card 
+      key={x.id}
+      img={x.coverImg}
+      rating={x.stats.rating}
+      review={x.stats.reviewCount}
+      country={x.location}
+      title={x.title}
+      price={x.price}
+      openSpots={x.openSpots}
+    />
+  });
+  return (
+    <>
+      <NavBar />
+      <Hero />
+      <div className="cards-container">
+        {arr}
+      </div>
+    </>
+  );
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(<App />, document.getElementById("root"));
